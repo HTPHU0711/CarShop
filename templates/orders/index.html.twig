@@ -1,0 +1,43 @@
+
+
+{% extends 'admin.html.twig' %}
+
+{% block title %}Order Management{% endblock %}
+
+{% block body %}
+  <div class="page-heading pb-2 mt-4 mb-2">
+    <h3>Order Manager</h3>
+  </div>
+  <div class="page-content">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Product Name</th>
+              <th>Price</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in range(0, orders|length - 1) %}
+            <tr>
+            {% 
+                set u = random(0, user|length - 1)
+            %}
+            {%
+                set pro = random(0, product|length - 1)
+            %}
+              <td>{{ orders[i].id }}</td>
+              <td>{{ product[pro].name }}</td>
+              <td>{{ product[pro].price }}</td>
+              <td>{{ user[u].address }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

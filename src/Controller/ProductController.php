@@ -4,18 +4,17 @@ namespace App\Controller;
 
 use App\Entity\Product;
 use App\Form\ProductType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ProductRepository;
-use ProductType as GlobalProductType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-
 /**
  * @Route("/product")
  */
+
 class ProductController extends AbstractController
 {
     private ProductRepository $repo;
@@ -50,28 +49,28 @@ class ProductController extends AbstractController
     public function createAction(Request $req, SluggerInterface $slugger): Response
     {
         
-        $p = new Product();
-        $form = $this->createForm(ProductType::class, $p);
+    $p = new Product();
+    $form = $this->createForm(ProductType::class, $p);
 
-        $form->handleRequest($req);
-        if($form->isSubmitted() && $form->isValid()){
-            if($p->getCreated()===null){
-                $p->setCreated(new \DateTime());
-            }
-            $imgFile = $form->get('file')->getData();
-            if ($imgFile) {
-                $newFilename = $this->uploadImage($imgFile,$slugger);
-                $p->setImage($newFilename);
-            }
-            $this->repo->add($p,true);
-            return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
+    $form->handleRequest($req);
+    if($form->isSubmitted() && $form->isValid()){
+        if($p->getCreated()===null){
+            $p->setCreated(new \DateTime());
         }
-        return $this->render("product/form.html.twig",[
-            'form' => $form->createView()
-        ]);
+        $imgFile = $form->get('file')->getData();
+        if ($imgFile) {
+            $newFilename = $this->uploadImage($imgFile,$slugger);
+            $p->setImage($newFilename);
+        }
+        $this->repo->save($p,true);
+        return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
     }
+    return $this->render("product/form.html.twig",[
+        'form' => $form->createView()
+    ]);
+    }   
 
-     /**
+    /**
      * @Route("/edit/{id}", name="product_edit",requirements={"id"="\d+"})
      */
     public function editAction(Request $req, Product $p,
@@ -91,7 +90,7 @@ class ProductController extends AbstractController
                 $newFilename = $this->uploadImage($imgFile,$slugger);
                 $p->setImage($newFilename);
             }
-            $this->repo->add($p,true);
+            $this->repo->save($p,true);
             return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
         }
         return $this->render("product/form.html.twig",[
@@ -117,11 +116,10 @@ class ProductController extends AbstractController
     /**
      * @Route("/delete/{id}",name="product_delete",requirements={"id"="\d+"})
      */
-    
+
     public function deleteAction(Request $request, Product $p): Response
     {
         $this->repo->remove($p,true);
         return $this->redirectToRoute('product_show', [], Response::HTTP_SEE_OTHER);
     }
-
 }

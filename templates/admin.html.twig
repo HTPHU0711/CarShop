@@ -50,14 +50,10 @@
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
                 <a href="index.html" class="app-brand-link">
-                    <a class="navbar-brand mt-2 mt-sm-0 m-auto d-block" href="{{path('homepage')}}">
-                        <img
-                        src="https://talent2win.com/wp-content/uploads/2021/09/LogoDefault.png"
-                        height="50px"
-                        alt="Logo"
-                        loading="lazy"
-                        />
-                  </a>
+    <a class="navbar-brand mt-2 mt-sm-0 m-auto d-block" href="{{path('homepage')}}">
+        <img src="/images/carlogo4.png" style="padding: 0px; height: 70px;" alt="Logo" loading="lazy" />
+    </a>
+</a>
                 <a href="" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
                     <i class="bx bx-chevron-left bx-sm align-middle"></i>
                 </a>
@@ -82,21 +78,20 @@
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
                 <div>Product</div>
               </a>
-              {# <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="create.html" class="menu-link">
-                    <div data-i18n="Account">Create new</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="pages-account-settings-notifications.html" class="menu-link">
-                    <div data-i18n="Notifications">Show all</div>
-                  </a>
-                </li>
-              </ul> #}
-            </li>
+              <a href="{{path('app_users')}}" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div>Users</div>
+              </a>
+              <li class="menu-item">
+              <a href="{{path('brand_show')}}" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div>Brand</div>
+              </a>
+              <a href="{{path('order_show')}}" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div>Order</div>
+              </a>
             
-          </ul>
         </aside>
         <!-- / Menu -->
 
@@ -149,7 +144,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">{{  app.user.name }}</span>
+                            <span class="fw-semibold d-block">Admin</span>
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
@@ -183,7 +178,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" href="{{ path('app_logout') }}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -211,35 +206,25 @@
 
             <!-- Footer -->
             <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">ThemeSelection</a>
-                </div>
-                <div>
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+        <div class="mb-2 mb-md-0">
+            &copy;
+            <script>
+                document.write(new Date().getFullYear());
+            </script>
+            , made with HATYPHU by
+            <a href="https://fpt.edu.vn/greenwich/" target="_blank" class="footer-link fw-bolder">FPT GREENWICH</a>
+        </div>
+        <div>
+            <a href="#" class="footer-link me-4" target="_blank">Terms of Service</a>
+            <a href="#" target="_blank" class="footer-link me-4">Privacy Policy</a>
 
-                  <a
-                    href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
+            <a href="#" target="_blank" class="footer-link me-4">Contact Us</a>
 
-                  <a
-                    href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
+            <a href="#" target="_blank" class="footer-link me-4">Support</a>
+        </div>
+    </div>
+</footer>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

@@ -2,19 +2,23 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SearchController extends AbstractController
 {
     /**
-     * @Route("/search", name="app_search")
+     * @Route("/search", name="search_product", methods={"GET"})
      */
-    public function search(): Response
+    public function searchAction(ProductRepository $repo, Request $req): Response
     {
+        $mess = $req->query->get('search');
+        $product = $repo->searchproduct($mess);
         return $this->render('search/index.html.twig', [
-            'controller_name' => 'SearchController',
+            'search'=>$product
         ]);
     }
 }

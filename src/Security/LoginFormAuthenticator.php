@@ -21,11 +21,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     public const LOGIN_ROUTE = 'app_login';
 
-    private UrlGeneratorInterface $urlGenerator;
-
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
-        $this->urlGenerator = $urlGenerator;
     }
 
     public function authenticate(Request $request): Passport
@@ -48,13 +45,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-
         $user = $token->getRoleNames();
-        if(in_array('ROLE_ADMIN', $user, true))
-        // For example:
-            return new RedirectResponse($this->urlGenerator->generate('app_admin'));
+        if(in_array('ROLE_ADMIN', $user,true))
+        return new RedirectResponse($this->urlGenerator->generate('adminPage'));
         else
-            return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        return new RedirectResponse($this->urlGenerator->generate('homepage'));
+        // For example:
+        // return new RedirectResponse($this->urlGenerator->generate('some_route'));
     }
 
     protected function getLoginUrl(Request $request): string

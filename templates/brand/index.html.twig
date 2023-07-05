@@ -1,0 +1,43 @@
+
+
+{% extends 'admin.html.twig' %}
+
+{% block title %}Brand Management{% endblock %}
+
+{% block body %}
+  <div class="page-heading pb-2 mt-4 mb-2">
+    <h3>Brand Manager</h3>
+    <a href="{{ path('brand_create') }}" class="btn btn-outline-primary">Add Brand</a>
+  </div>
+  <div class="page-content">
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Product</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for brand in brands %}
+            <tr>
+              <td>{{ brand.id }}</td>
+              <td>{{ brand.name }}</td>
+              <td>{{ brand.description }}</td>
+              <td>{{ brand.product }}</td>
+              <td>
+                <a href="{{ path('brand_edit', {'id': brand.id}) }}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{{ path('brand_delete', {'id': brand.id}) }}" onclick="return confirm('Are you sure?')" class="btn btn-sm btn-danger">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -21,7 +21,7 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
-    public function add(Product $entity, bool $flush = false): void
+    public function save(Product $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -39,20 +39,19 @@ class ProductRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Product[] Returns an array of Product objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Product[] Returns an array of Product objects
+    */
+   public function searchproduct($product): array
+   {
+    return $this->createQueryBuilder('p')
+    ->select('p.id, p.name, p.price, p.image')
+    ->where('p.name LIKE :productName')
+    ->setParameter('productName', "%${product}%")
+    ->getQuery()
+    ->getResult()
+    ;
+   }
 
 //    public function findOneBySomeField($value): ?Product
 //    {
@@ -63,4 +62,17 @@ class ProductRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+/**
+     * @return Product[] Returns an array of Product objects
+     */
+    public function findBySearchProduct($product): array
+    {
+        return $this->createQueryBuilder('p')
+            ->select('p.id, p.name, p.price, p.image')
+            ->where('p.name LIKE :productName')
+            ->setParameter('productName', "%${product}%")
+            ->andWhere('p.name = 1')
+            ->getQuery()
+            ->getResult();
+    }
 }

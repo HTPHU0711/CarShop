@@ -1,4 +1,4 @@
-{% extends "home.html.twig" %}
+{% extends "base.html.twig" %}
 {% block title %}
     Detail of product {{p.id}}
 {% endblock %}
@@ -22,8 +22,7 @@
                     <div class="product_description">
                         <div class="product_name">{{p.name}}</div>
                         
-                        {# <div> <span class="product_price"><span>&#8363;</span> {{p.price}}</div> #}
-                         <div> <span class="product_price">${{p.price}}</div>
+                        <div> <span class="product_price"><span>&#8363;</span> {{p.price}}</div>
                         
                         <div>  
                             <span class="product_info">Date: {{p.created|date("m/d/Y")}}<span><br> 
@@ -31,10 +30,10 @@
                         
                         <hr class="singleline">
                         <div class="order_info d-flex flex-row">
-                            <form action="#">
+                
                         </div>
                         <div class="row">
-                            <form action="#" method="get">
+                            <form action="{{path('app_cart',{'id':p.id})}}" method="get">
                             <div class="col-lg-3 mb-4" style="margin-left: 13px;">
                                 <div class="form-group">
                                     <label for="qty_label">Quantity:</label>

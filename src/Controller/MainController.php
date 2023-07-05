@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\ProductRepository;
 
 class MainController extends AbstractController
 {
@@ -15,7 +16,7 @@ class MainController extends AbstractController
       $this->repo = $repo;
    }
     /**
-     * @Route("/", name="homepage")
+     * @Route("/home", name="homepage")
      */
     public function indexPageAction(): Response
     {
@@ -24,13 +25,23 @@ class MainController extends AbstractController
             'products'=>$products
         ]);
     }
-     /**
-     * @Route("/admin", name="adminPage")
+
+       /**
+     * @Route("/detail/{id}", name="product_read",requirements={"id"="\d+"})
      */
-    public function adminPageAction(): Response{
-        return $this->render('admin.html.twig', [
-            
+    public function showAction(Product $p): Response
+    {
+        return $this->render('detail.html.twig', [
+            'p'=>$p
         ]);
     }
-
+    /**
+     * @Route("/home/product_detail/{id}", name="app_product_detail", methods={"GET"})
+     */
+    public function detail(Product $product): Response
+    {
+        return $this->render('product/detail.html.twig', [
+            'product' => $product,
+        ]);
+    }
 }

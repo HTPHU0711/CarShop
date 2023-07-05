@@ -1,0 +1,45 @@
+{% extends 'admin.html.twig' %}
+
+{# {% block title %}Customer index{% endblock %} #}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 1100px; width: 90%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    td, th, a{ font-size: 12px}
+</style>
+
+<div class="example-wrapper">
+    <h2>Customer Information</h2>
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>UserName</th>
+                <th>Address</th>
+                <th>Telephone</th>
+                <th>BirthDate</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for u in user %}
+            <tr>
+                <td>{{ u.id }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.name }}</td>
+                <td>{{ u.address }}</td>
+                <td>{{ u.telephone }}</td>
+                <td>{{ u.birthday ? u.birthday|date('d-m-Y') : '' }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}

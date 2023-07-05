@@ -19,15 +19,18 @@
                                             <div class="form-group">
                                                 <label for="first-name-vertical">Product Name</label>
                                                 {{ form_widget(form.name, {'attr':{'placeholder':'Product Name'}}) }}
-                                                {# <input type="text" id="pname" class="form-control"
-                                                    name="Product_Name" placeholder="Product Name"
-                                                    value =""> #}
                                             </div>
                                         </div>
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="contact-info-vertical">Price</label>
                                                 {{ form_widget(form.price, {'attr':{'placeholder':'Price'}}) }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="contact-info-vertical">Brand</label>
+                                                {{ form_widget(form.brand, {'attr':{'placeholder':'Brand'}}) }}
                                             </div>
                                         </div>
                                         <div class="col-12">

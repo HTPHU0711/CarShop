@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class UserType extends AbstractType
 {
@@ -19,14 +20,15 @@ class UserType extends AbstractType
         $builder
             ->add('email', EmailType::class)
             ->add('name', TextType::class)
+            ->add('address', TextType::class)
+            ->add('telephone', TextType::class)
+            ->add('birthday', DateType::class,['widget'=>'single_text','required'=>false])
             ->add('password', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'first_options' => ['label' => 'Password'],
                 'second_options' => ['label' => 'Confirm Password']
             ])
-            ->add('add', SubmitType::class,[
-                'label' => "Register"
-            ]);
+            ->add("save",SubmitType::class,['label'=>'Register'])
         ;
     }
 
@@ -36,5 +38,4 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
-
 }
